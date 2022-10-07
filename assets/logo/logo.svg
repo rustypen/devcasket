@@ -1,0 +1,52 @@
+<svg viewBox="0 0 200 50">
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Barlow+Condensed:700");
+  </style>
+  <g filter="url(#icon_filter)">
+    <text
+      x="50%"
+      y="50%"
+      dy="0.15em"
+      alignment-baseline="middle"
+      text-anchor="middle"
+      font-family="Barlow Condensed"
+      font-size="40px"
+      fill="currentcolor"
+      letter-spacing="2"
+      shape-rendering="geometricPrecision"
+      filter="url(#text_filter)"
+      dominant-baseline="middle"
+    >
+      DEV CASKET
+    </text>
+  </g>
+  <defs>
+    <filter id="icon_filter">
+      <feMorphology in="SourceAlpha" result="MORPH" operator="dilate" radius="1.25" />
+      <feColorMatrix in="MORPH" result="WHITENED" type="matrix" values="-1 0 0 0 1, 0 -1 0 0 1, 0 0 -1 0 1, 0 0 0 1 0"/>
+      <feMerge>
+        <feMergeNode in="WHITENED"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+      <feDropShadow
+        dx="2"
+        dy="2"
+        stdDeviation="0"
+        flood-color="currentcolor"
+        flood-opacity="1" />
+    </filter>
+
+    <filter id="text_filter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" result="blur" />   
+      <feColorMatrix in="blur" type="matrix"
+        values="
+          1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 7 -1"
+        result="goo"
+      />
+      <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
+    </filter>
+  </defs>
+</svg>
