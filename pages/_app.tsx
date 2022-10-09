@@ -15,6 +15,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../utils/theme';
 import createEmotionCache from '../utils/createEmotionCache';
+import { SWRConfig } from 'swr'
 
 config.autoAddCss = false
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -79,17 +80,24 @@ export default function MyApp({ Component, pageProps, emotionCache = clientSideE
 
   return (
     <UserProvider supabaseClient={supabaseClient}>
-      <CacheProvider value={emotionCache}>
-        <Head>
-          <meta name="viewport" content="initial-scale=1, width=device-width" />
-        </Head>
-        <ThemeProvider theme={theme}>
-          {/* <CssBaseline /> */}
-          {getLayout(
-            <Component {...pageProps} session={session}/>
-          )}
-        </ThemeProvider>
-    </CacheProvider>
+      <SWRConfig
+        value={{
+          refreshInterval: 3000,
+          fetcher: (resource, init) => fetch(resource, init).then(res => res.json())
+        }}
+      >
+        <CacheProvider value={emotionCache}>
+          <Head>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </Head>
+          <ThemeProvider theme={theme}>
+            {/* <CssBaseline /> */}
+            {getLayout(
+              <Component {...pageProps} session={session}/>
+            )}
+          </ThemeProvider>
+        </CacheProvider>
+      </SWRConfig>
     </UserProvider>
   )
 }

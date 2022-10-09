@@ -18,7 +18,8 @@
     "paths": {
       "@/utils/*": ["utils/*"],
       "@/assets/*": ["assets/*"],
-      "@/components/*": ["components/*"]
+      "@/components/*": ["components/*"],
+      "@/server/*": ["server/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "assets/icons/git-icons/index.js"],
